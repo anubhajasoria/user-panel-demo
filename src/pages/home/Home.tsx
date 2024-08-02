@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editUserName, setList } from "../store/contentSlice";
+import { editUserName, setList } from "../../store/contentSlice";
+import { RiDeleteBinLine, RiEdit2Fill } from "react-icons/ri";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { Pagination, Portal, Button } from "../components";
+import { Pagination, Portal, Button } from "../../components";
+import DeletePortal from "./DelelePortal";
 
 // Define the types for the user item
 interface UserItem {
@@ -27,6 +29,7 @@ interface AppState {
 const Home: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isDeleted, setIsDeleted] = useState<boolean>(false);
   const [item, setItem] = useState<UserItem | undefined>(undefined);
   const [userName, setUserName] = useState<string>("");
   const [index, setIndex] = useState<number>(0);
@@ -48,6 +51,11 @@ const Home: React.FC = () => {
     setUserName("");
   };
 
+  const handleContentClick = (e: React.MouseEvent) => {
+    // Stop the event from propagating to the parent div
+    e.stopPropagation();
+  };
+
   return (
     <div className="p-4 w-full flex flex-col justify-center">
       <div className="relative overflow-x-auto">
@@ -65,6 +73,9 @@ const Home: React.FC = () => {
               </th>
               <th scope="col" className="px-6 py-3">
                 Role
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Action
               </th>
             </tr>
           </thead>
@@ -89,6 +100,21 @@ const Home: React.FC = () => {
                 <td className="px-6 py-4">{e.name}</td>
                 <td className="px-6 py-4">{e.email}</td>
                 <td className="px-6 py-4">{e.role}</td>
+                <td className="flex px-6 py-4 gap-4">
+                  <span
+                    className="p-2 border rounded"
+                    onClick={(e) => {
+                      handleContentClick(e);
+                      setIsDeleted(true);
+                      setIndex(i);
+                    }}
+                  >
+                    <RiDeleteBinLine />
+                  </span>
+                  <span className="p-2 border rounded">
+                    <RiEdit2Fill />
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -187,6 +213,12 @@ const Home: React.FC = () => {
           </div>
         </div>
       </Portal>
+
+      <DeletePortal
+        isOpen={isDeleted}
+        onClose={() => setIsDeleted(false)}
+        index={index}
+      />
     </div>
   );
 };

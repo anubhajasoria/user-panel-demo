@@ -43,11 +43,15 @@ const contentSlice = createSlice({
     setMenuIndex: (state, action: PayloadAction<{ index: number }>) => {
       state.menuIndex = action.payload.index;
     },
+    deleteItem: (state, action: PayloadAction<{ index: number }>) => {
+      state.userList.splice(action.payload.index, 1);
+    },
   },
 });
 
 // Export action creators
-export const { editUserName, setList, setMenuIndex } = contentSlice.actions;
+export const { editUserName, setList, setMenuIndex, deleteItem } =
+  contentSlice.actions;
 
 // Export reducer
 export default contentSlice.reducer;

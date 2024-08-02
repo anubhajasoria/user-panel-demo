@@ -1,7 +1,6 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "../App";
-import Home from "../pages/Home";
-import Profile from "../pages/Profile";
+import Home from "../pages/home/Home";
+import Profile from "../pages/profile/Profile";
 
 export const routes = [
   {
