@@ -22,7 +22,7 @@ const DeletePortal: React.FC<DeletePortalProps> = ({
     <Portal isOpen={isOpen} onClose={onClose}>
       <div className="rounded-xl bg-white shadow p-12 gap-y-8 flex flex-col max-h-[70vh] overflow-y-scroll text-gray-700">
         Are you sure about deleting this item?
-        <div className="flex items-center justify-end mt-8">
+        <div className="flex items-center justify-end mt-8 gap-x-4">
           <Button title="Cancel" primaryType={false} onClick={onClose} />
           <Button
             title="Delete"

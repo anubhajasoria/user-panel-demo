@@ -200,7 +200,7 @@ const Home: React.FC = () => {
               />
             </div>
           </div>
-          <div className="flex items-center justify-end mt-8">
+          <div className="flex items-center justify-end mt-8 gap-x-4">
             <Button title="Cancel" primaryType={false} onClick={onClose} />
             <Button
               title="Save"

@@ -16,9 +16,9 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
 }) => {
   const secondary =
-    " cursor-pointer  whitespace-nowrap text-primary border border-primary rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2 ";
+    " cursor-pointer  whitespace-nowrap text-primary border border-primary rounded-lg px-4 py-2.5 text-center  ";
   const primary =
-    "  whitespace-nowrap bg-gradient-to-r text-white from-primary to-indigo-600 rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2 ";
+    "  whitespace-nowrap bg-gradient-to-r text-white from-primary to-indigo-600 rounded-lg px-4 py-2.5 text-center  ";
 
   return (
     <button
