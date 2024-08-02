@@ -1,10 +1,11 @@
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./App.css";
+import { Header } from "./components";
 
 function App() {
   return (
     <>
-      <div>Anubha</div>
+      <Header />
       <Outlet />
     </>
   );
