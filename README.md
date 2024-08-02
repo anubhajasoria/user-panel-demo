@@ -15,4 +15,9 @@ Functionalities not implemented due to time constraints:
 - Edit other details except for username (username is currently editable)
 - Validations (would be added using yup and formik)
 
-Note: It can be added easily if I spend more time on this project,
+Note: It can be added easily if I spend more time on this project.
+
+Steps to run:
+
+- npm install
+- npm run dev
