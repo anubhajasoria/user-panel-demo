@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { Portal, Button } from "../../components";
 import { deleteItem } from "../../store/contentSlice";
 
