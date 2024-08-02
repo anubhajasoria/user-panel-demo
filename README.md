@@ -7,7 +7,7 @@ Tools and Libraries I have used :
 - Redux toolkit
 - Tailwind CSS
 - Flowbite React
-- React Route
+- React Router
 
 Functionalities not implemented due to time constraints:
 
