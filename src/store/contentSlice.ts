@@ -1,8 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+// Define the type for a user item
+interface UserItem {
+  id: string;
+  username: string;
+  name: string;
+  email: string;
+  role: string;
+  phone?: string;
+  city?: string;
+}
+
 // Define the type for your state
 export interface CounterState {
-  userList: any[];
+  userList: UserItem[];
   menuIndex: number;
 }
 
@@ -17,16 +28,19 @@ const contentSlice = createSlice({
   name: "content",
   initialState,
   reducers: {
-    setList: (state, action: PayloadAction<any>) => {
+    setList: (state, action: PayloadAction<UserItem[]>) => {
       state.userList = action.payload;
-      // flag to check if user is in search  mode or not
     },
-    editUserName: (state, action) => {
-      state.userList[action.payload.index].username = action.payload.username;
-      // state.searchList
-      // to clear search results
+    editUserName: (
+      state,
+      action: PayloadAction<{ index: number; username: string }>
+    ) => {
+      const { index, username } = action.payload;
+      if (state.userList[index]) {
+        state.userList[index].username = username;
+      }
     },
-    setMenuIndex: (state, action) => {
+    setMenuIndex: (state, action: PayloadAction<{ index: number }>) => {
       state.menuIndex = action.payload.index;
     },
   },

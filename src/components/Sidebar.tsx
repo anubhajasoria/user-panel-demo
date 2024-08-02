@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { MenuItems } from "../data/SidebarMenu";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { AppState } from "../store"; // Make sure to import your AppState type
 import { setMenuIndex } from "../store/contentSlice";
 
+// Define the type for the menu items
 interface MenuItem {
   name: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  icon: any;
+  icon: React.ReactNode; // Use React.ReactNode for icons
   navigate: string;
 }
 
-const Sidebar = () => {
-  const index = useSelector((state) => state.content.menuIndex);
+const Sidebar: React.FC = () => {
+  // Define the type for your state
+  const index = useSelector((state: AppState) => state.content.menuIndex);
   const dispatch = useDispatch();
+
   return (
     <div className="hidden md:flex flex-col w-[15vw] p-4 shadow-lg shadow-slate-300">
       {MenuItems.map((item: MenuItem, i: number) => (

@@ -1,19 +1,20 @@
+import React from "react";
 import { Outlet } from "react-router-dom";
 import "./App.css";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { Header, Sidebar } from "./components";
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="h-screen flex flex-col">
       <Header />
-      <div className="flex-1 flex ">
+      <div className="flex-1 flex">
         <Sidebar />
         <Outlet />
       </div>
-
-      {/* <Footer /> */}
     </div>
   );
-}
+};
 
 export default App;

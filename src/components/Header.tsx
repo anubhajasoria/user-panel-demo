@@ -4,8 +4,12 @@ import { FaUserCircle } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import CollapsibleSidebar from "./CollapsibleSidebar";
 
-const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+// Define the type for the component props
+interface HeaderProps {}
+
+const Header: React.FC<HeaderProps> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
     <>
       <div className="p-4 flex h-[10vh] shadow-lg shadow-slate-300 items-center md:justify-between w-screen bg-gradient-to-r from-primary to-indigo-600">
@@ -16,7 +20,7 @@ const Header = () => {
           <SiMixpanel />
           User Panel Demo
         </span>
-        <span className=" hidden  md:flex items-center  gap-4">
+        <span className="hidden md:flex items-center gap-4">
           User Name
           <FaUserCircle size={24} />
         </span>
