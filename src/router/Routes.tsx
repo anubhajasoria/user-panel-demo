@@ -10,12 +10,10 @@ export const routes = [
       {
         path: "/",
         element: <Home />,
-        // loader: teamLoader,
       },
       {
         path: "/profile",
         element: <Profile />,
-        // loader: teamLoader,
       },
     ],
   },
