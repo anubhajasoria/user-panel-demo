@@ -6,7 +6,14 @@ export default {
     "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#5541d7",
+      },
+      fontFamily: {
+        mulish: ["Mulish", "sans-serif"],
+      },
+    },
   },
   // eslint-disable-next-line no-undef
   plugins: [require("flowbite/plugin")],

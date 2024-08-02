@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "username": "alicejohnson",
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "role": "user",
+    "phone": "555-1234",
+    "city": "New York"
+  },
+  {
+    "id": 2,
+    "username": "bobsmith",
+    "name": "Bob Smith",
+    "email": "bob.smith@example.com",
+    "role": "admin",
+    "phone": "555-2345",
+    "city": "Los Angeles"
+  },
+  {
+    "id": 3,
+    "username": "charliebrown",
+    "name": "Charlie Brown",
+    "email": "charlie.brown@example.com",
+    "role": "user",
+    "phone": "555-3456",
+    "city": "Chicago"
+  },
+  {
+    "id": 4,
+    "username": "daviddavis",
+    "name": "David Davis",
+    "email": "david.davis@example.com",
+    "role": "user",
+    "phone": "555-4567",
+    "city": "Houston"
+  },
+  {
+    "id": 5,
+    "username": "evagreen",
+    "name": "Eva Green",
+    "email": "eva.green@example.com",
+    "role": "admin",
+    "phone": "555-5678",
+    "city": "Phoenix"
+  },
+  {
+    "id": 6,
+    "username": "frankmiller",
+    "name": "Frank Miller",
+    "email": "frank.miller@example.com",
+    "role": "user",
+    "phone": "555-6789",
+    "city": "Philadelphia"
+  },
+  {
+    "id": 7,
+    "username": "gracelee",
+    "name": "Grace Lee",
+    "email": "grace.lee@example.com",
+    "role": "user",
+    "phone": "555-7890",
+    "city": "San Antonio"
+  },
+  {
+    "id": 8,
+    "username": "hankwhite",
+    "name": "Hank White",
+    "email": "hank.white@example.com",
+    "role": "admin",
+    "phone": "555-8901",
+    "city": "San Diego"
+  },
+  {
+    "id": 9,
+    "username": "islablack",
+    "name": "Isla Black",
+    "email": "isla.black@example.com",
+    "role": "user",
+    "phone": "555-9012",
+    "city": "Dallas"
+  },
+  {
+    "id": 10,
+    "username": "jackmoore",
+    "name": "Jack Moore",
+    "email": "jack.moore@example.com",
+    "role": "user",
+    "phone": "555-0123",
+    "city": "San Jose"
+  },
+  {
+    "id": 11,
+    "username": "karenwilson",
+    "name": "Karen Wilson",
+    "email": "karen.wilson@example.com",
+    "role": "admin",
+    "phone": "555-2346",
+    "city": "Austin"
+  },
+  {
+    "id": 12,
+    "username": "leothomas",
+    "name": "Leo Thomas",
+    "email": "leo.thomas@example.com",
+    "role": "user",
+    "phone": "555-3457",
+    "city": "Jacksonville"
+  },
+  {
+    "id": 13,
+    "username": "miagarcia",
+    "name": "Mia Garcia",
+    "email": "mia.garcia@example.com",
+    "role": "user",
+    "phone": "555-4568",
+    "city": "Fort Worth"
+  },
+  {
+    "id": 14,
+    "username": "noahmartinez",
+    "name": "Noah Martinez",
+    "email": "noah.martinez@example.com",
+    "role": "admin",
+    "phone": "555-5679",
+    "city": "Columbus"
+  },
+  {
+    "id": 15,
+    "username": "oliviarobinson",
+    "name": "Olivia Robinson",
+    "email": "olivia.robinson@example.com",
+    "role": "user",
+    "phone": "555-6780",
+    "city": "Charlotte"
+  },
+  {
+    "id": 16,
+    "username": "paulclark",
+    "name": "Paul Clark",
+    "email": "paul.clark@example.com",
+    "role": "user",
+    "phone": "555-7891",
+    "city": "San Francisco"
+  },
+  {
+    "id": 17,
+    "username": "quinnrodriguez",
+    "name": "Quinn Rodriguez",
+    "email": "quinn.rodriguez@example.com",
+    "role": "admin",
+    "phone": "555-8902",
+    "city": "Indianapolis"
+  },
+  {
+    "id": 18,
+    "username": "rileylewis",
+    "name": "Riley Lewis",
+    "email": "riley.lewis@example.com",
+    "role": "user",
+    "phone": "555-9013",
+    "city": "Seattle"
+  },
+  {
+    "id": 19,
+    "username": "sophiawalker",
+    "name": "Sophia Walker",
+    "email": "sophia.walker@example.com",
+    "role": "user",
+    "phone": "555-0124",
+    "city": "Denver"
+  },
+  {
+    "id": 20,
+    "username": "thomashall",
+    "name": "Thomas Hall",
+    "email": "thomas.hall@example.com",
+    "role": "admin",
+    "phone": "555-2347",
+    "city": "Washington"
+  },
+  {
+    "id": 21,
+    "username": "umayoung",
+    "name": "Uma Young",
+    "email": "uma.young@example.com",
+    "role": "user",
+    "phone": "555-3458",
+    "city": "Boston"
+  },
+  {
+    "id": 22,
+    "username": "victorhernandez",
+    "name": "Victor Hernandez",
+    "email": "victor.hernandez@example.com",
+    "role": "user",
+    "phone": "555-4569",
+    "city": "El Paso"
+  },
+  {
+    "id": 23,
+    "username": "wendyking",
+    "name": "Wendy King",
+    "email": "wendy.king@example.com",
+    "role": "admin",
+    "phone": "555-5670",
+    "city": "Nashville"
+  },
+  {
+    "id": 24,
+    "username": "xanderscott",
+    "name": "Xander Scott",
+    "email": "xander.scott@example.com",
+    "role": "user",
+    "phone": "555-6781",
+    "city": "Detroit"
+  },
+  {
+    "id": 25,
+    "username": "yaralopez",
+    "name": "Yara Lopez",
+    "email": "yara.lopez@example.com",
+    "role": "user",
+    "phone": "555-7892",
+    "city": "Memphis"
+  }
+]
