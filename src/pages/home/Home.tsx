@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editUserName, setList } from "../../store/contentSlice";
+import { editUsers, setList } from "../../store/contentSlice";
 import { RiDeleteBinLine, RiEdit2Fill } from "react-icons/ri";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { Pagination, Portal, Button } from "../../components";
 import DeletePortal from "./DelelePortal";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-// Define the types for the user item
 interface UserItem {
   id: string;
   username: string;
@@ -18,7 +17,6 @@ interface UserItem {
   city?: string;
 }
 
-// Define the types for the state
 interface AppState {
   content: {
     userList: UserItem[];
@@ -26,13 +24,39 @@ interface AppState {
   };
 }
 
+const validationSchema = Yup.object().shape({
+  username: Yup.string()
+    .matches(
+      /^[a-zA-Z0-9]+$/,
+      "Username cannot contain spaces or special characters"
+    )
+    .required("Username is required"),
+  name: Yup.string()
+    .matches(
+      /^[a-zA-Z\s]+$/,
+      "Name cannot contain numbers or special characters"
+    )
+    .required("Name is required"),
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  phone: Yup.string()
+    .matches(/^[0-9]{10}$/, "Phone number must be 10 digits")
+    .required("Phone number is required"),
+  city: Yup.string()
+    .matches(
+      /^[a-zA-Z\s]+$/,
+      "City cannot contain numbers or special characters"
+    )
+    .required("City is required"),
+});
+
 const Home: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
   const [item, setItem] = useState<UserItem | undefined>(undefined);
-  const [userName, setUserName] = useState<string>("");
-  const [index, setIndex] = useState<number>(0);
+  const [id, setId] = useState<string>("");
   const itemsPerPage = 10;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = page * itemsPerPage;
@@ -48,12 +72,6 @@ const Home: React.FC = () => {
   const onClose = () => {
     setIsOpen(false);
     setItem(undefined);
-    setUserName("");
-  };
-
-  const handleContentClick = (e: React.MouseEvent) => {
-    // Stop the event from propagating to the parent div
-    e.stopPropagation();
   };
 
   return (
@@ -80,15 +98,14 @@ const Home: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {userList.slice(startIndex, endIndex).map((e, i: number) => (
+            {userList.slice(startIndex, endIndex).map((e) => (
               <tr
                 className="bg-white border-b hover:bg-indigo-100 cursor-pointer"
                 key={e.id}
                 onClick={() => {
                   setIsOpen(true);
-                  setUserName(e.username);
                   setItem(e);
-                  setIndex(i);
+                  setId(e.id);
                 }}
               >
                 <th
@@ -103,10 +120,10 @@ const Home: React.FC = () => {
                 <td className="flex px-6 py-4 gap-4">
                   <span
                     className="p-2 border rounded"
-                    onClick={(e) => {
-                      handleContentClick(e);
+                    onClick={(event) => {
+                      event.stopPropagation();
                       setIsDeleted(true);
-                      setIndex(i);
+                      setId(e.id);
                     }}
                   >
                     <RiDeleteBinLine />
@@ -129,95 +146,135 @@ const Home: React.FC = () => {
       </div>
 
       <Portal isOpen={isOpen} onClose={onClose}>
-        <div className="rounded-xl bg-white shadow p-12 gap-y-8 flex flex-col max-h-[70vh] overflow-y-scroll">
-          <div className="flex flex-col md:flex-row justify-between gap-x-12 gap-y-8 md:gap-y-0">
-            <div className="flex flex-col gap-2">
-              <label className="text-gray-500">Username</label>
-              <input
-                className="p-2 rounded border border-slate-300 text-gray-700 focus:outline-none focus:ring-1 focus:ring-indigo-600"
-                name="username"
-                type="text"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-gray-500">Name</label>
-              <input
-                className="p-2 rounded border border-slate-300 text-gray-700"
-                name="name"
-                type="text"
-                value={item?.name}
-                disabled
-              />
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row justify-between gap-x-12 gap-y-8 md:gap-y-0">
-            <div className="flex flex-col gap-2">
-              <label className="text-gray-500">Email</label>
-              <input
-                className="p-2 rounded border border-slate-300 text-gray-700"
-                name="email"
-                type="email"
-                disabled
-                value={item?.email}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-gray-500">Phone</label>
-              <input
-                className="p-2 rounded border border-slate-300 text-gray-700"
-                name="phone"
-                type="tel"
-                value={item?.phone}
-                disabled
-              />
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row justify-between items-end gap-x-12 gap-y-8 md:gap-y-0">
-            <div className="flex flex-col gap-2">
-              <label className="text-gray-500" htmlFor="city">
-                City
-              </label>
-              <input
-                className="p-2 rounded border border-slate-300 text-gray-700"
-                name="city"
-                type="text"
-                value={item?.city}
-                disabled
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <label className="text-gray-500" htmlFor="role">
-                Admin
-              </label>
-              <input
-                className="p-2 rounded border border-slate-300 checked:bg-indigo-600"
-                name="role"
-                type="checkbox"
-                checked={item?.role === "admin"}
-                disabled
-              />
-            </div>
-          </div>
-          <div className="flex items-center justify-end mt-8 gap-x-4">
-            <Button title="Cancel" primaryType={false} onClick={onClose} />
-            <Button
-              title="Save"
-              primaryType
-              onClick={() => {
-                dispatch(editUserName({ username: userName, index }));
-                onClose();
-              }}
-            />
-          </div>
-        </div>
+        <Formik
+          initialValues={{
+            username: item?.username || "",
+            name: item?.name || "",
+            email: item?.email || "",
+            phone: item?.phone || "",
+            city: item?.city || "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(values) => {
+            if (item) {
+              dispatch(editUsers({ id: item.id, updatedValues: values }));
+            }
+            onClose();
+          }}
+        >
+          {({ handleSubmit }) => (
+            <Form className="rounded-xl bg-white shadow p-12 gap-y-8 flex flex-col max-h-[70vh] w-[70vw] overflow-y-scroll">
+              <div className="flex flex-col md:flex-row justify-between gap-x-12 gap-y-8 md:gap-y-0">
+                <div className="flex flex-col gap-2 w-full">
+                  <label className="text-gray-500" htmlFor="username">
+                    Username
+                  </label>
+                  <Field
+                    className="p-2 rounded border border-slate-300 text-gray-700 focus:outline-none focus:ring-1 focus:ring-indigo-600"
+                    name="username"
+                    type="text"
+                  />
+                  <ErrorMessage
+                    name="username"
+                    component="div"
+                    className="text-red-600 text-[0.7rem] max-w-[80%] break-words"
+                  />
+                </div>
+                <div className="flex flex-col gap-2 w-full">
+                  <label className="text-gray-500" htmlFor="name">
+                    Name
+                  </label>
+                  <Field
+                    className="p-2 rounded border border-slate-300 text-gray-700"
+                    name="name"
+                    type="text"
+                  />
+                  <ErrorMessage
+                    name="name"
+                    component="div"
+                    className="text-red-600 text-[0.7rem] max-w-full break-words"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row justify-between gap-x-12 gap-y-8 md:gap-y-0">
+                <div className="flex flex-col gap-2 w-full">
+                  <label className="text-gray-500" htmlFor="email">
+                    Email
+                  </label>
+                  <Field
+                    className="p-2 rounded border border-slate-300 text-gray-700"
+                    name="email"
+                    type="email"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-red-600 text-[0.7rem] max-w-full break-words"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row justify-between items-start gap-x-12 gap-y-8 md:gap-y-0">
+                <div className="flex flex-col gap-2 w-full">
+                  <label className="text-gray-500" htmlFor="phone">
+                    Phone
+                  </label>
+                  <Field
+                    className="p-2 rounded border border-slate-300 text-gray-700"
+                    name="phone"
+                    type="tel"
+                  />
+                  <ErrorMessage
+                    name="phone"
+                    component="div"
+                    className="text-red-600 text-[0.7rem] max-w-full break-words"
+                  />
+                </div>
+                <div className="flex flex-col gap-2 w-full">
+                  <label className="text-gray-500" htmlFor="city">
+                    City
+                  </label>
+                  <Field
+                    className="p-2 rounded border border-slate-300 text-gray-700"
+                    name="city"
+                    type="text"
+                  />
+                  <ErrorMessage
+                    name="city"
+                    component="div"
+                    className="text-red-600 text-[0.7rem] max-w-full break-words"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <label className="text-gray-500" htmlFor="role">
+                  Admin
+                </label>
+                <Field
+                  className="p-2 rounded border border-slate-300 checked:bg-indigo-600"
+                  name="role"
+                  type="checkbox"
+                  checked={item?.role === "admin"}
+                  disabled
+                />
+              </div>
+              <div className="flex items-center justify-end mt-8 gap-x-4">
+                <Button title="Cancel" primaryType={false} onClick={onClose} />
+                <Button
+                  type="submit"
+                  title="Save"
+                  primaryType
+                  onClick={handleSubmit}
+                />
+              </div>
+            </Form>
+          )}
+        </Formik>
       </Portal>
 
       <DeletePortal
         isOpen={isDeleted}
         onClose={() => setIsDeleted(false)}
-        index={index}
+        id={id}
       />
     </div>
   );

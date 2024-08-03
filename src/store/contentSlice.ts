@@ -31,26 +31,26 @@ const contentSlice = createSlice({
     setList: (state, action: PayloadAction<UserItem[]>) => {
       state.userList = action.payload;
     },
-    editUserName: (
+    editUsers: (
       state,
-      action: PayloadAction<{ index: number; username: string }>
+      action: PayloadAction<{ id: string; updatedValues: Partial<UserItem> }>
     ) => {
-      const { index, username } = action.payload;
-      if (state.userList[index]) {
-        state.userList[index].username = username;
-      }
+      const { id, updatedValues } = action.payload;
+      state.userList = state.userList.map((obj) =>
+        obj.id === id ? { ...obj, ...updatedValues } : obj
+      );
     },
     setMenuIndex: (state, action: PayloadAction<{ index: number }>) => {
       state.menuIndex = action.payload.index;
     },
-    deleteItem: (state, action: PayloadAction<{ index: number }>) => {
-      state.userList.splice(action.payload.index, 1);
+    deleteItem: (state, action: PayloadAction<{ id: string }>) => {
+      state.userList = state.userList.filter((e) => e.id !== action.payload.id);
     },
   },
 });
 
 // Export action creators
-export const { editUserName, setList, setMenuIndex, deleteItem } =
+export const { editUsers, setList, setMenuIndex, deleteItem } =
   contentSlice.actions;
 
 // Export reducer

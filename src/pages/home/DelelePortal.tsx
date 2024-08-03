@@ -8,14 +8,10 @@ import { deleteItem } from "../../store/contentSlice";
 interface DeletePortalProps {
   isOpen: boolean;
   onClose: () => void;
-  index: number;
+  id: string;
 }
 
-const DeletePortal: React.FC<DeletePortalProps> = ({
-  isOpen,
-  onClose,
-  index,
-}) => {
+const DeletePortal: React.FC<DeletePortalProps> = ({ isOpen, onClose, id }) => {
   const dispatch = useDispatch();
 
   return (
@@ -28,7 +24,7 @@ const DeletePortal: React.FC<DeletePortalProps> = ({
             title="Delete"
             primaryType={true}
             onClick={() => {
-              dispatch(deleteItem({ index }));
+              dispatch(deleteItem({ id: id }));
               onClose();
             }}
           />
