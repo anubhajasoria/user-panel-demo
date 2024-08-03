@@ -1,6 +1,6 @@
 Hi,
 
-Please checkout the demo task code here. This project has been created using Vite and the design is responsive.
+Please checkout the demo task code here. This project has been created using Vite and the design is responsive. The data displayed is the dummy data stored in a local JSON file.
 
 Tools and Libraries I have used :
 
@@ -8,14 +8,8 @@ Tools and Libraries I have used :
 - Tailwind CSS
 - Flowbite React
 - React Router
-
-Functionalities not implemented due to time constraints:
-
-- Add new user
-- Edit other details except for username (username is currently editable)
-- Validations (would be added using yup and formik)
-
-Note: It can be added easily if I spend more time on this project.
+- Yup
+- Formik
 
 Steps to run:
 

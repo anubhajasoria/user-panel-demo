@@ -12,13 +12,13 @@ interface UserItem {
 }
 
 // Define the type for your state
-export interface CounterState {
+export interface ContentState {
   userList: UserItem[];
   menuIndex: number;
 }
 
 // Initial state
-const initialState: CounterState = {
+const initialState: ContentState = {
   userList: [],
   menuIndex: 0,
 };
@@ -36,21 +36,30 @@ const contentSlice = createSlice({
       action: PayloadAction<{ id: string; updatedValues: Partial<UserItem> }>
     ) => {
       const { id, updatedValues } = action.payload;
-      state.userList = state.userList.map((obj) =>
-        obj.id === id ? { ...obj, ...updatedValues } : obj
+      state.userList = state.userList.map((user) =>
+        user.id === id ? { ...user, ...updatedValues } : user
       );
     },
     setMenuIndex: (state, action: PayloadAction<{ index: number }>) => {
       state.menuIndex = action.payload.index;
     },
     deleteItem: (state, action: PayloadAction<{ id: string }>) => {
-      state.userList = state.userList.filter((e) => e.id !== action.payload.id);
+      state.userList = state.userList.filter(
+        (user) => user.id !== action.payload.id
+      );
+    },
+    addItem: (
+      state,
+      action: PayloadAction<UserItem> // Expect a complete UserItem with an id
+    ) => {
+      const newItem = action.payload;
+      state.userList.unshift(newItem);
     },
   },
 });
 
 // Export action creators
-export const { editUsers, setList, setMenuIndex, deleteItem } =
+export const { editUsers, setList, setMenuIndex, deleteItem, addItem } =
   contentSlice.actions;
 
 // Export reducer
